@@ -8,7 +8,8 @@
     "test": "nyc mocha test/**/*.{ts,tsx}",
     "build": "rm -rf target && tsc",
     "format": "tslint 'src/**/*.ts' --fix",
-    "lint": "tslint 'src/**/*.ts'"
+    "lint": "tslint 'src/**/*.ts'",
+    "install": "npm run build"
   },
   "repository": {
     "type": "git",
