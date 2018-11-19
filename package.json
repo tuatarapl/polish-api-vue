@@ -1,0 +1,35 @@
+{
+  "name": "polish-api-vue",
+  "version": "1.0.0",
+  "description": "Vue components for visualization and editing Polish API Models",
+  "main": "target",
+  "types": "src",
+  "scripts": {
+    "test": "nyc mocha test/**/*.{ts,tsx}",
+    "build": "rm -rf target && tsc",
+    "format": "tslint 'src/**/*.ts' --fix",
+    "lint": "tslint 'src/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/tuatarapl/polish-api-vue.git"
+  },
+  "keywords": [
+    "vue",
+    "typescript",
+    "polish-api",
+    "psd2"
+  ],
+  "author": "Grzegorz Abramczyk <grzegorz.abramczyk@tuatara.pl>",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/tuatarapl/polish-api-vue#readme",
+  "devDependencies": {
+    "@types/vue": "^2.0.0",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {
+    "vue": "^2.5.17"
+  }
+}
