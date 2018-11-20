@@ -1,4 +1,149 @@
 import Vue from 'vue'
+Vue.component('consent-view', {
+    props: ['consent'],
+    template: `
+<dl class="row" v-if="consent">
+    <dt class="col-sm-3">Scope Group Type</dt>
+    <dd class="col-sm-9">{{consent.scope_details.scopeGroupType}}</dd>
+
+    <template v-if="consent.scope_details.privilegeList.length">
+        <dt class="col-sm-3">Privilege List</dt>
+        <dd class="col-sm-9">
+            <dl class="row"  v-for="privilege in consent.scope_details.privilegeList">
+                <dt class="col-sm-3">Account Number</dt>
+                <dd class="col-sm-9">{{privilege.accountNumber}}</dd>
+
+                <template v-if="consent.scope_details.scopeGroupType === 'ais-accounts'
+                    && privilege['ais-accounts:getAccounts']">
+                    <dt class="col-sm-3">Get Accounts</dt>
+                    <dd class="col-sm-9">
+                        <privilege-ais-aspsp-in-simple-view :privilege="privilege['ais-accounts:getAccounts']">
+                        </privilege-ais-aspsp-in-simple-view>
+                    </dd>
+                </template>
+
+                <template v-if="consent.scope_details.scopeGroupType === 'ais'
+                    && privilege['ais:getAccount']">
+                    <dt class="col-sm-3">Get Account</dt>
+                    <dd class="col-sm-9">
+                        <privilege-ais-aspsp-in-simple-view :privilege="privilege['ais:getAccount']">
+                        </privilege-ais-aspsp-in-simple-view>
+                    </dd>
+                </template>
+
+                <template v-if="consent.scope_details.scopeGroupType === 'ais'
+                    && privilege['ais:getHolds']">
+                    <dt class="col-sm-3">Get Holds</dt>
+                    <dd class="col-sm-9">
+                        <privilege-ais-aspsp-in-view :privilege="privilege['ais:getHolds']">
+                        </privilege-ais-aspsp-in-view>
+                    </dd>
+                </template>
+                
+                <template v-if="consent.scope_details.scopeGroupType === 'ais'
+                    && privilege['ais:getTransactionsDone']">
+                    <dt class="col-sm-3">Get Transactions Done</dt>
+                    <dd class="col-sm-9">
+                        <privilege-ais-aspsp-in-view :privilege="privilege['ais:getTransactionsDone']">
+                        </privilege-ais-aspsp-in-view>
+                    </dd>
+                </template>
+
+                <template v-if="consent.scope_details.scopeGroupType === 'ais'
+                    && privilege['ais:getTransactionsPending']">
+                    <dt class="col-sm-3">Get Transactions Pending</dt>
+                    <dd class="col-sm-9">
+                        <privilege-ais-aspsp-in-view :privilege="privilege['ais:getTransactionsPending']">
+                        </privilege-ais-aspsp-in-view>
+                    </dd>
+                </template>
+
+                <template v-if="consent.scope_details.scopeGroupType === 'ais'
+                    && privilege['ais:getTransactionsRejected']">
+                    <dt class="col-sm-3">Get Transactions Rejected</dt>
+                    <dd class="col-sm-9">
+                        <privilege-ais-aspsp-in-view :privilege="privilege['ais:getTransactionsRejected']">
+                        </privilege-ais-aspsp-in-view>
+                    </dd>
+                </template>
+
+                <template v-if="consent.scope_details.scopeGroupType === 'ais'
+                    && privilege['ais:getTransactionsCancelled']">
+                    <dt class="col-sm-3">Get Transactions Cancelled</dt>
+                    <dd class="col-sm-9">
+                        <privilege-ais-aspsp-in-view :privilege="privilege['ais:getTransactionsCancelled']">
+                        </privilege-ais-aspsp-in-view>
+                    </dd>
+                </template>
+
+                <template v-if="consent.scope_details.scopeGroupType === 'ais'
+                    && privilege['ais:getTransactionsScheduled']">
+                    <dt class="col-sm-3">Get Transactions Scheduled</dt>
+                    <dd class="col-sm-9">
+                        <privilege-ais-aspsp-in-view :privilege="privilege['ais:getTransactionsScheduled']">
+                        </privilege-ais-aspsp-in-view>
+                    </dd>
+                </template>
+
+                <template v-if="consent.scope_details.scopeGroupType === 'ais'
+                    && privilege['ais:getTransactionDetail']">
+                    <dt class="col-sm-3">Get Transaction Detail</dt>
+                    <dd class="col-sm-9">
+                        <privilege-ais-aspsp-in-simple-view :privilege="privilege['ais:getTransactionDetail']">
+                        </privilege-ais-aspsp-in-simple-view>
+                    </dd>
+                </template>
+            </dl>
+        </dd>
+    </template>
+
+    <dt class="col-sm-3">Scope Time Limit</dt>
+    <dd class="col-sm-9">{{consent.scope_details.scopeTimeLimit}}</dd>
+
+    <dt class="col-sm-3">Scope Time Duration</dt>
+    <dd class="col-sm-9">{{consent.scope_details.scopeTimeDuration}}</dd>
+
+    <dt class="col-sm-3">Consent Id</dt>
+    <dd class="col-sm-9">{{consent.scope_details.consentId}}</dd>
+
+    <dt class="col-sm-3">Throttling Policy</dt>
+    <dd class="col-sm-9">{{consent.scope_details.throttlingPolicy}}</dd>
+</dl>
+`
+})
+
+Vue.component('privilege-section-view-wrapper', {
+    props: ['privilege', 'label', 'component'],
+    template: `
+<dl class="row" v-if="privilege">
+    <dt class="col-sm-3">{{label}}</dt>
+    <dd class="col-sm-9"><component :is="component" :privilege="privilege"></component></dd>
+</dl>
+    `
+})
+
+Vue.component('privilege-ais-aspsp-in-simple-view', {
+    props: ['privilege', 'readonly'],
+    template: `
+<dl class="row" v-if="privilege">
+    <dt class="col-sm-4">Scope Usage Limit</dt>
+    <dd class="col-sm-8">{{privilege.scopeUsageLimit}}</dd>
+</dl>
+    `
+})
+Vue.component('privilege-ais-aspsp-in-view', {
+    props: ['privilege', 'readonly'],
+    template: `
+<dl class="row" v-if="privilege">
+    <dt class="col-sm-4">Scope Usage Limit</dt>
+    <dd class="col-sm-8">{{privilege.scopeUsageLimit}}</dd>
+
+    <dt class="col-sm-4">Max Allowed History Long</dt>
+    <dd class="col-sm-8">{{privilege.maxAllowedHistoryLong}}</dd>
+</dl>
+    `
+})
+
 Vue.component('consent-edit', {
     props: ['consent', 'readonly', 'accounts'],
     template: `
