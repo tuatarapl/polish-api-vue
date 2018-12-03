@@ -263,6 +263,13 @@ Vue.component('consent-edit', {
                 </privilege-section-wrapper>
                 <privilege-section-wrapper v-if="consent.scope_details.scopeGroupType === 'pis'"
                     :privilege="privilege"
+                    label="Cancel Payment"
+                    section="pis:cancelPayment"
+                    component="privilege-cancel-payment-edit"
+                    :readonly="readonly">
+                </privilege-section-wrapper>
+                <privilege-section-wrapper v-if="consent.scope_details.scopeGroupType === 'pis'"
+                    :privilege="privilege"
                     label="Bundle Transfers"
                     section="pis:bundle"
                     component="privilege-bundle-transfers-edit"
@@ -883,6 +890,25 @@ Vue.component('privilege-tax-transfer-edit', {
     <delivery-mode-edit v-model="privilege.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
     <system-edit v-model="privilege.system" kind="domestic" :readonly="readonly"></system-edit>
     <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
+</div>
+    `
+})
+
+Vue.component('privilege-cancel-payment-edit', {
+    props: ['privilege', 'readonly'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
+    <div class="form-group">
+        <label for="paymentId">Payment Id</label>
+        <input type="text" class="form-control" id="paymentId"
+            v-model="privilege.paymentId" :readonly="readonly"/>
+    </div>
+    <div class="form-group">
+        <label for="bundleId">Bundle Id</label>
+        <input type="text" class="form-control" id="bundleId"
+            v-model="privilege.bundleId" :readonly="readonly"/>
+    </div>
 </div>
     `
 })
