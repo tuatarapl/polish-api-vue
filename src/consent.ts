@@ -573,6 +573,21 @@ Vue.component('system-edit', {
 `
 })
 
+Vue.component('execution-mode-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="form-group">
+    <label for="executionMode">Execution Mode</label>
+    <select type="text" class="form-control" id="executionMode"
+        v-model="value" :disabled="readonly">
+        <option>Immediate</option>
+        <option>FutureDated</option>
+        <option>Recurring</option>
+    </select>
+</div>
+`
+})
+
 Vue.component('privilege-domestic-transfer-edit', {
     props: ['privilege', 'readonly'],
     template: `
@@ -591,15 +606,7 @@ Vue.component('privilege-domestic-transfer-edit', {
     <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
     <delivery-mode-edit v-model="privilege.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
     <system-edit v-model="privilege.system" kind="domestic" :readonly="readonly"></system-edit>
-    <div class="form-group">
-        <label for="executionMode">Execution Mode</label>
-        <select type="text" class="form-control" id="executionMode"
-            v-model="privilege.executionMode" :disabled="readonly">
-            <option>Immediate</option>
-            <option>FutureDated</option>
-            <option>Recurring</option>
-        </select>
-    </div>
+    <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
 </div>
     `,
     data() {
