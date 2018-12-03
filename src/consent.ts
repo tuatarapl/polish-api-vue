@@ -588,16 +588,24 @@ Vue.component('execution-mode-edit', {
 `
 })
 
+Vue.component('scope-usage-limit-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="form-group">
+    <label for="scopeUsageLimit">Scope Usage Limit</label>
+    <select class="form-control" id="scopeUsageLimit" v-model="value" :disabled="readonly">
+        <option>single</option>
+        <option>multiple</option>
+    </select>
+</div>
+`
+})
+
 Vue.component('privilege-domestic-transfer-edit', {
     props: ['privilege', 'readonly'],
     template: `
 <div v-if="privilege">
-    <div class="form-group">
-        <label for="scopeUsageLimit">Scope Usage Limit</label>
-        <select class="form-control" id="scopeUsageLimit" v-model="privilege.scopeUsageLimit" :disabled="readonly">
-            <option v-for="scopeUsageLimit in scopeUsageLimits">{{scopeUsageLimit}}</option>
-        </select>
-    </div>
+    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
     <h2>Recipient</h2>
     <recipient-pis-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-edit>
     <h2>Sender</h2>
@@ -608,10 +616,5 @@ Vue.component('privilege-domestic-transfer-edit', {
     <system-edit v-model="privilege.system" kind="domestic" :readonly="readonly"></system-edit>
     <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
 </div>
-    `,
-    data() {
-        return {
-            scopeUsageLimits: ['single', 'multiple']
-        }
-    }
+    `
 })
