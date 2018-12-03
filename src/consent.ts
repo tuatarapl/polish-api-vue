@@ -554,6 +554,25 @@ Vue.component('delivery-mode-edit', {
 `
 })
 
+Vue.component('system-edit', {
+    props: ['value', 'kind', 'readonly'],
+    template: `
+<div class="form-group">
+    <label for="system">System</label>
+    <select type="text" class="form-control" id="system"
+        v-model="value" :disabled="readonly">
+        <template v-if="kind == 'domestic'">
+            <option>Elixir</option>
+            <option>ExpressElixir</option>
+            <option>Sorbnet</option>
+            <option>BlueCash</option>
+            <option>Internal</option>
+        </template>
+    </select>
+</div>
+`
+})
+
 Vue.component('privilege-domestic-transfer-edit', {
     props: ['privilege', 'readonly'],
     template: `
@@ -571,17 +590,7 @@ Vue.component('privilege-domestic-transfer-edit', {
     <h2>Transfer Data</h2>
     <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
     <delivery-mode-edit v-model="privilege.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
-    <div class="form-group">
-        <label for="system">System</label>
-        <select type="text" class="form-control" id="system"
-            v-model="privilege.system" :disabled="readonly">
-            <option>Elixir</option>
-            <option>ExpressElixir</option>
-            <option>Sorbnet</option>
-            <option>BlueCash</option>
-            <option>Internal</option>
-        </select>
-    </div>
+    <system-edit v-model="privilege.system" kind="domestic" :readonly="readonly"></system-edit>
     <div class="form-group">
         <label for="executionMode">Execution Mode</label>
         <select type="text" class="form-control" id="executionMode"
