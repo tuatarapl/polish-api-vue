@@ -322,42 +322,22 @@ Vue.component('privilege-ais-aspsp-in-simple-edit', {
     props: ['privilege', 'readonly'],
     template: `
 <div v-if="privilege">
-    <div class="form-group">
-        <label for="scopeUsageLimit">Scope Usage Limit</label>
-        <select class="form-control" id="scopeUsageLimit" v-model="privilege.scopeUsageLimit" :disabled="readonly">
-            <option v-for="scopeUsageLimit in scopeUsageLimits">{{scopeUsageLimit}}</option>
-        </select>
-    </div>
+    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
 </div>
-    `,
-    data() {
-        return {
-            scopeUsageLimits: ['single', 'multiple']
-        }
-    }
+    `
 })
 Vue.component('privilege-ais-aspsp-in-edit', {
     props: ['privilege', 'readonly'],
     template: `
 <div v-if="privilege">
-    <div class="form-group">
-        <label for="scopeUsageLimit">Scope Usage Limit</label>
-        <select class="form-control" id="scopeUsageLimit" v-model="privilege.scopeUsageLimit" :disabled="readonly">
-            <option v-for="scopeUsageLimit in scopeUsageLimits">{{scopeUsageLimit}}</option>
-        </select>
-    </div>
+    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
     <div class="form-group">
         <label for="maxAllowedHistoryLong">Max Allowed History Long</label>
         <input type="number" class="form-control" id="maxAllowedHistoryLong"
             v-model.number="privilege.maxAllowedHistoryLong" min="1" max="1460" :readonly="readonly"/>
     </div>
 </div>
-    `,
-    data() {
-        return {
-            scopeUsageLimits: ['single', 'multiple']
-        }
-    }
+    `
 })
 
 Vue.component('recipient-pis-edit', {
