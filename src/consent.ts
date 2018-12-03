@@ -261,6 +261,13 @@ Vue.component('consent-edit', {
                     component="privilege-tax-transfer-edit"
                     :readonly="readonly">
                 </privilege-section-wrapper>
+                <privilege-section-wrapper v-if="consent.scope_details.scopeGroupType === 'pis'"
+                    :privilege="privilege"
+                    label="Bundle Transfers"
+                    section="pis:bundle"
+                    component="privilege-bundle-transfers-edit"
+                    :readonly="readonly">
+                </privilege-section-wrapper>
                 <button type="button" class="btn btn-primary" @click="doDeletePrivilege(index)" v-if="!readonly">
                     Delete
                 </button>
@@ -876,6 +883,77 @@ Vue.component('privilege-tax-transfer-edit', {
     <delivery-mode-edit v-model="privilege.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
     <system-edit v-model="privilege.system" kind="domestic" :readonly="readonly"></system-edit>
     <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
+</div>
+    `
+})
+
+Vue.component('transfers-edit', {
+    props: ['value', 'component', 'readonly'],
+    template: `
+<ul class="list-group">
+    <li v-for="(item, index) in value" class="list-group-item">
+        <component :is="component" :privilege="item" :readonly="readonly"></component>
+        <button type="button" class="btn btn-primary" @click="doRemove(index)">
+            Remove
+        </button>
+    </li>
+    <li class="list-group-item">
+        <button type="button" class="btn btn-primary" @click="doAdd()">
+            Add
+        </button>
+    </li>
+</ul>
+`,
+    methods: {
+        doAdd() {
+            if (this.value) {
+                this.value.push({})
+            } else {
+                this.$emit('input',  [{}])
+            }
+        },
+        doRemove(index: number) {
+            this.value.splice(index, 1)
+        }
+    }
+})
+
+Vue.component('privilege-bundle-transfers-edit', {
+    props: ['privilege', 'readonly'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
+    <div class="form-group">
+        <label for="transfersTotalAmount">Transfers Total Amount</label>
+        <input type="text" class="form-control" id="transfersTotalAmount"
+            v-model="privilege.transfersTotalAmount" :readonly="readonly"/>
+    </div>
+    <div class="form-group">
+        <label for="typeOfTransfers">Type of Transfers</label>
+        <select type="text" class="form-control" id="typeOfTransfers"
+            v-model="privilege.typeOfTransfers" :disabled="readonly">
+            <option>domestic</option>
+            <option>EEA</option>
+            <option>nonEEA</option>
+            <option>tax</option>
+        </select>
+        <h2>Domestic Transfers</h2>
+        <transfers-edit class="mb-4" component="privilege-domestic-transfer-edit"
+            v-model="privilege.domesticTransfers" :readonly="readonly">
+        </transfers-edit>
+        <h2>EEA Transfers</h2>
+        <transfers-edit class="mb-4" component="privilege-foreign-transfer-eea-edit"
+            v-model="privilege.EEATransfers" :readonly="readonly">
+        </transfers-edit>
+        <h2>Non EEA Transfers</h2>
+        <transfers-edit class="mb-4" component="privilege-foreign-transfer-non-eea-edit"
+            v-model="privilege.nonEEATransfers" :readonly="readonly">
+        </transfers-edit>
+        <h2>Tax Transfers</h2>
+        <transfers-edit  class="mb-4" component="privilege-tax-transfer-edit"
+            v-model="privilege.taxTransfers" :readonly="readonly">
+        </transfers-edit>
+    </div>
 </div>
     `
 })
