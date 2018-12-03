@@ -554,6 +554,34 @@ Vue.component('privilege-domestic-transfer-edit', {
     <sender-pis-domestic-edit v-model="privilege.sender" :readonly="readonly"></sender-pis-domestic-edit>
     <h2>Transfer Data</h2>
     <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
+    <div class="form-group">
+        <label for="deliveryMode">Delivery Mode</label>
+        <select type="text" class="form-control" id="deliveryMode"
+            v-model="privilege.deliveryMode" :disabled="readonly">
+            <option>ExpressD0</option>
+            <option>StandardD1</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="system">System</label>
+        <select type="text" class="form-control" id="system"
+            v-model="privilege.system" :disabled="readonly">
+            <option>Elixir</option>
+            <option>ExpressElixir</option>
+            <option>Sorbnet</option>
+            <option>BlueCash</option>
+            <option>Internal</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="executionMode">Execution Mode</label>
+        <select type="text" class="form-control" id="executionMode"
+            v-model="privilege.executionMode" :disabled="readonly">
+            <option>Immediate</option>
+            <option>FutureDated</option>
+            <option>Recurring</option>
+        </select>
+    </div>
 </div>
     `,
     data() {
