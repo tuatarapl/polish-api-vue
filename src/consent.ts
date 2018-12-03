@@ -544,7 +544,7 @@ Vue.component('delivery-mode-edit', {
 <div class="form-group">
     <label for="deliveryMode">Delivery Mode</label>
     <select type="text" class="form-control" id="deliveryMode"
-        v-model="value" :disabled="readonly">
+        :value="value" @input="$emit('input',$event.target.value)" :disabled="readonly">
         <template v-if="kind == 'domestic'">
             <option>ExpressD0</option>
             <option>StandardD1</option>
@@ -560,7 +560,7 @@ Vue.component('system-edit', {
 <div class="form-group">
     <label for="system">System</label>
     <select type="text" class="form-control" id="system"
-        v-model="value" :disabled="readonly">
+        :value="value" @input="$emit('input',$event.target.value)" :disabled="readonly">
         <template v-if="kind == 'domestic'">
             <option>Elixir</option>
             <option>ExpressElixir</option>
@@ -579,7 +579,7 @@ Vue.component('execution-mode-edit', {
 <div class="form-group">
     <label for="executionMode">Execution Mode</label>
     <select type="text" class="form-control" id="executionMode"
-        v-model="value" :disabled="readonly">
+        :value="value" @input="$emit('input',$event.target.value)" :disabled="readonly">
         <option>Immediate</option>
         <option>FutureDated</option>
         <option>Recurring</option>
@@ -593,7 +593,8 @@ Vue.component('scope-usage-limit-edit', {
     template: `
 <div class="form-group">
     <label for="scopeUsageLimit">Scope Usage Limit</label>
-    <select class="form-control" id="scopeUsageLimit" v-model="value" :disabled="readonly">
+    <select class="form-control" id="scopeUsageLimit" :value="value"
+        @input="$emit('input',$event.target.value)" :disabled="readonly">
         <option>single</option>
         <option>multiple</option>
     </select>
