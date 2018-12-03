@@ -254,6 +254,13 @@ Vue.component('consent-edit', {
                     component="privilege-foreign-transfer-non-eea-edit"
                     :readonly="readonly">
                 </privilege-section-wrapper>
+                <privilege-section-wrapper v-if="consent.scope_details.scopeGroupType === 'pis'"
+                    :privilege="privilege"
+                    label="Tax Transfer"
+                    section="pis:tax"
+                    component="privilege-tax-transfer-edit"
+                    :readonly="readonly">
+                </privilege-section-wrapper>
                 <button type="button" class="btn btn-primary" @click="doDeletePrivilege(index)" v-if="!readonly">
                     Delete
                 </button>
@@ -649,6 +656,68 @@ Vue.component('bank-edit', {
     }
 })
 
+Vue.component('us-info-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="ml-4">
+    <template v-if="value">
+        <div class="form-group">
+            <label for="bicOrSwift">Payor Id</label>
+            <input type="text" class="form-control" id="bicOrSwift"
+                v-model="value.payerInfo.payorId" :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="payorIdType">Payor Id< Type</label>
+            <select type="text" class="form-control" id="payorIdType"
+                v-model="value.payerInfo.payorIdType" :disabled="readonly">
+                <option>N</option>
+                <option>P</option>
+                <option>R</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="formCode">Form Code</label>
+            <input type="text" class="form-control" id="formCode"
+                v-model="value.formCode" :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="periodId">Period Id</label>
+            <input type="text" class="form-control" id="periodId"
+                v-model="value.periodId" :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="periodType">Period Type</label>
+            <input type="text" class="form-control" id="periodType"
+                v-model="value.periodType" :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input type="number" class="form-control" id="year"
+                v-model.number="value.year" :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="obligationId">Obligation Id</label>
+            <input type="text" class="form-control" id="obligationId"
+                v-model="value.obligationId" :readonly="readonly"/>
+        </div>
+    </template>
+    <button type="button" class="btn btn-primary" @click="doInitialize()" v-else>
+        Initialize
+    </button>
+</div>
+`,
+    methods: {
+        doInitialize() {
+            this.$emit('input',   {
+                payerInfo: {}
+            })
+        }
+    }
+})
+
 Vue.component('delivery-mode-edit', {
     props: ['value', 'kind', 'readonly'],
     template: `
@@ -656,7 +725,7 @@ Vue.component('delivery-mode-edit', {
     <label for="deliveryMode">Delivery Mode</label>
     <select type="text" class="form-control" id="deliveryMode"
         :value="value" @input="$emit('input',$event.target.value)" :disabled="readonly">
-        <template v-if="kind == 'domestic' || kind == 'eea'">
+        <template v-if="kind == 'domestic' || kind == 'eea' || kind == 'tax'">
             <option>ExpressD0</option>
             <option>StandardD1</option>
         </template>
@@ -691,6 +760,10 @@ Vue.component('system-edit', {
         </template>
         <template v-if="kind == 'non-eea'">
             <option>Swift</option>
+        </template>
+        <template v-if="kind == 'tax'">
+            <option>Elixir</option>
+            <option>ExpressElixir</option>
         </template>
     </select>
 </div>
@@ -782,6 +855,26 @@ Vue.component('privilege-foreign-transfer-non-eea-edit', {
     </div>
     <delivery-mode-edit v-model="privilege.deliveryMode" kind="non-eea" :readonly="readonly"></delivery-mode-edit>
     <system-edit v-model="privilege.system" kind="non-eea" :readonly="readonly"></system-edit>
+    <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
+</div>
+    `
+})
+
+Vue.component('privilege-tax-transfer-edit', {
+    props: ['privilege', 'readonly'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
+    <h2>Recipient</h2>
+    <recipient-pis-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-edit>
+    <h2>Sender</h2>
+    <sender-pis-domestic-edit v-model="privilege.sender" :readonly="readonly"></sender-pis-domestic-edit>
+    <h2>Transfer Data</h2>
+    <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
+    <h2>Us Info</h2>
+    <us-info-edit v-model="privilege.usInfo" :readonly="readonly"></us-info-edit>
+    <delivery-mode-edit v-model="privilege.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
+    <system-edit v-model="privilege.system" kind="domestic" :readonly="readonly"></system-edit>
     <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
 </div>
     `
