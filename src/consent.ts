@@ -240,6 +240,13 @@ Vue.component('consent-edit', {
                     component="privilege-domestic-transfer-edit"
                     :readonly="readonly">
                 </privilege-section-wrapper>
+                <privilege-section-wrapper v-if="consent.scope_details.scopeGroupType === 'pis'"
+                    :privilege="privilege"
+                    label="EEA Transfer"
+                    section="pis:eea"
+                    component="privilege-foreign-transfer-eea-edit"
+                    :readonly="readonly">
+                </privilege-section-wrapper>
                 <button type="button" class="btn btn-primary" @click="doDeletePrivilege(index)" v-if="!readonly">
                     Delete
                 </button>
@@ -374,6 +381,45 @@ Vue.component('recipient-pis-edit', {
     }
 })
 
+Vue.component('recipient-pis-foreign-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="ml-4">
+    <template v-if="value">
+        <div class="form-group">
+            <label for="accountNumber">Account Number</label>
+            <input type="text" class="form-control" id="accountNumber" v-model="value.accountNumber"
+                :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" v-model="value.name"
+                :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address_0"
+                v-model="value.address[0]" :readonly="readonly"/>
+            <input type="text" class="form-control" id="address_1"
+                v-model="value.address[1]" :readonly="readonly"/>
+            <input type="text" class="form-control" id="address_2"
+                v-model="value.address[2]" :readonly="readonly"/>
+            <input type="text" class="form-control" id="address_3"
+                v-model="value.address[3]" :readonly="readonly"/>
+        </div>
+    </template>
+    <button type="button" class="btn btn-primary" @click="doInitialize()" v-if="!readonly && !value">
+        Initialize
+    </button>
+</div>
+`,
+    methods: {
+        doInitialize() {
+            this.$emit('input', {address: []})
+        }
+    }
+})
+
 Vue.component('sender-pis-domestic-edit', {
     props: ['value', 'readonly'],
     template: `
@@ -404,6 +450,33 @@ Vue.component('sender-pis-domestic-edit', {
     methods: {
         doInitialize() {
             this.$emit('input', {nameAddress: {value: []}})
+        }
+    }
+})
+
+Vue.component('sender-pis-foreign-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="ml-4">
+    <template v-if="value">
+        <div class="form-group">
+            <label for="accountNumber">Account Number</label>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.accountNumber" :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" v-model="value.name" :readonly="readonly"/>
+        </div>
+    </template>
+    <button type="button" class="btn btn-primary" @click="doInitialize()" v-if="!readonly && !value">
+        Initialize
+    </button>
+</div>
+`,
+    methods: {
+        doInitialize() {
+            this.$emit('input', {})
         }
     }
 })
@@ -525,7 +598,7 @@ Vue.component('delivery-mode-edit', {
     <label for="deliveryMode">Delivery Mode</label>
     <select type="text" class="form-control" id="deliveryMode"
         :value="value" @input="$emit('input',$event.target.value)" :disabled="readonly">
-        <template v-if="kind == 'domestic'">
+        <template v-if="kind == 'domestic' || kind == 'eea'">
             <option>ExpressD0</option>
             <option>StandardD1</option>
         </template>
@@ -547,6 +620,11 @@ Vue.component('system-edit', {
             <option>Sorbnet</option>
             <option>BlueCash</option>
             <option>Internal</option>
+        </template>
+        <template v-if="kind == 'eea'">
+            <option>SEPA</option>
+            <option>InstantSEPA</option>
+            <option>Target</option>
         </template>
     </select>
 </div>
@@ -595,6 +673,24 @@ Vue.component('privilege-domestic-transfer-edit', {
     <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
     <delivery-mode-edit v-model="privilege.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
     <system-edit v-model="privilege.system" kind="domestic" :readonly="readonly"></system-edit>
+    <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
+</div>
+    `
+})
+
+Vue.component('privilege-foreign-transfer-eea-edit', {
+    props: ['privilege', 'readonly'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
+    <h2>Recipient</h2>
+    <recipient-pis-foreign-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-foreign-edit>
+    <h2>Sender</h2>
+    <sender-pis-foreign-edit v-model="privilege.sender" :readonly="readonly"></sender-pis-foreign-edit>
+    <h2>Transfer Data</h2>
+    <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
+    <delivery-mode-edit v-model="privilege.deliveryMode" kind="eea" :readonly="readonly"></delivery-mode-edit>
+    <system-edit v-model="privilege.system" kind="eea" :readonly="readonly"></system-edit>
     <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
 </div>
     `
