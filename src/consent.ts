@@ -39,7 +39,7 @@ Vue.component('consent-view', {
                         </privilege-ais-aspsp-in-view>
                     </dd>
                 </template>
-                
+
                 <template v-if="consent.scope_details.scopeGroupType === 'ais'
                     && privilege['ais:getTransactionsDone']">
                     <dt class="col-sm-3">Get Transactions Done</dt>
@@ -233,6 +233,13 @@ Vue.component('consent-edit', {
                     component="privilege-ais-aspsp-in-simple-edit"
                     :readonly="readonly">
                 </privilege-section-wrapper>
+                <privilege-section-wrapper v-if="consent.scope_details.scopeGroupType === 'pis'"
+                    :privilege="privilege"
+                    label="Domestic Transfer"
+                    section="pis:domestic"
+                    component="privilege-domestic-transfer-edit"
+                    :readonly="readonly">
+                </privilege-section-wrapper>
                 <button type="button" class="btn btn-primary" @click="doDeletePrivilege(index)" v-if="!readonly">
                     Delete
                 </button>
@@ -344,6 +351,61 @@ Vue.component('privilege-ais-aspsp-in-edit', {
         <input type="number" class="form-control" id="maxAllowedHistoryLong"
             v-model.number="privilege.maxAllowedHistoryLong" min="1" max="1460" :readonly="readonly"/>
     </div>
+</div>
+    `,
+    data() {
+        return {
+            scopeUsageLimits: ['single', 'multiple']
+        }
+    }
+})
+
+Vue.component('recipient-pis-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="ml-4">
+    <template v-if="value">
+        <div class="form-group">
+            <label for="accountNumber">Account Number</label>
+            <input type="text" class="form-control" id="accountNumber" v-model="value.accountNumber"
+                :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="nameAddress">Name Address</label>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.nameAddress.value[0]" :readonly="readonly"/>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.nameAddress.value[1]" :readonly="readonly"/>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.nameAddress.value[2]" :readonly="readonly"/>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.nameAddress.value[3]" :readonly="readonly"/>
+        </div>
+    </template>
+    <button type="button" class="btn btn-primary" @click="doInitialize()" v-if="!readonly && !value">
+        Initialize
+    </button>
+</div>
+`,
+    methods: {
+        doInitialize() {
+            this.$emit('input', {nameAddress: {value: []}})
+        }
+    }
+})
+
+Vue.component('privilege-domestic-transfer-edit', {
+    props: ['privilege', 'readonly'],
+    template: `
+<div v-if="privilege">
+    <div class="form-group">
+        <label for="scopeUsageLimit">Scope Usage Limit</label>
+        <select class="form-control" id="scopeUsageLimit" v-model="privilege.scopeUsageLimit" :disabled="readonly">
+            <option v-for="scopeUsageLimit in scopeUsageLimits">{{scopeUsageLimit}}</option>
+        </select>
+    </div>
+    <h2>Recipient</h2>
+    <recipient-pis-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-edit>
 </div>
     `,
     data() {
