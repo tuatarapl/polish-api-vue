@@ -538,6 +538,22 @@ Vue.component('transfer-data-edit', {
     }
 })
 
+Vue.component('delivery-mode-edit', {
+    props: ['value', 'kind', 'readonly'],
+    template: `
+<div class="form-group">
+    <label for="deliveryMode">Delivery Mode</label>
+    <select type="text" class="form-control" id="deliveryMode"
+        v-model="value" :disabled="readonly">
+        <template v-if="kind == 'domestic'">
+            <option>ExpressD0</option>
+            <option>StandardD1</option>
+        </template>
+    </select>
+</div>
+`
+})
+
 Vue.component('privilege-domestic-transfer-edit', {
     props: ['privilege', 'readonly'],
     template: `
@@ -554,14 +570,7 @@ Vue.component('privilege-domestic-transfer-edit', {
     <sender-pis-domestic-edit v-model="privilege.sender" :readonly="readonly"></sender-pis-domestic-edit>
     <h2>Transfer Data</h2>
     <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
-    <div class="form-group">
-        <label for="deliveryMode">Delivery Mode</label>
-        <select type="text" class="form-control" id="deliveryMode"
-            v-model="privilege.deliveryMode" :disabled="readonly">
-            <option>ExpressD0</option>
-            <option>StandardD1</option>
-        </select>
-    </div>
+    <delivery-mode-edit v-model="privilege.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
     <div class="form-group">
         <label for="system">System</label>
         <select type="text" class="form-control" id="system"
