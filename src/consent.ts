@@ -394,6 +394,40 @@ Vue.component('recipient-pis-edit', {
     }
 })
 
+Vue.component('sender-pis-domestic-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="ml-4">
+    <template v-if="value">
+        <div class="form-group">
+            <label for="accountNumber">Account Number</label>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.accountNumber" :readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label for="nameAddress">Name Address</label>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.nameAddress.value[0]" :readonly="readonly"/>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.nameAddress.value[1]" :readonly="readonly"/>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.nameAddress.value[2]" :readonly="readonly"/>
+            <input type="text" class="form-control" id="accountNumber"
+                v-model="value.nameAddress.value[3]" :readonly="readonly"/>
+        </div>
+    </template>
+    <button type="button" class="btn btn-primary" @click="doInitialize()" v-if="!readonly && !value">
+        Initialize
+    </button>
+</div>
+`,
+    methods: {
+        doInitialize() {
+            this.$emit('input', {nameAddress: {value: []}})
+        }
+    }
+})
+
 Vue.component('privilege-domestic-transfer-edit', {
     props: ['privilege', 'readonly'],
     template: `
@@ -406,6 +440,8 @@ Vue.component('privilege-domestic-transfer-edit', {
     </div>
     <h2>Recipient</h2>
     <recipient-pis-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-edit>
+    <h2>Sender</h2>
+    <sender-pis-domestic-edit v-model="privilege.sender" :readonly="readonly"></sender-pis-domestic-edit>
 </div>
     `,
     data() {
