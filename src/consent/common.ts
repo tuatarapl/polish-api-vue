@@ -111,7 +111,7 @@ Vue.component('consent-edit', {
                 <privilege-section-wrapper v-if="consent.scope_details.scopeGroupType === 'pis'"
                     :privilege="privilege"
                     label="EEA Transfer"
-                    section="pis:eea"
+                    section="pis:EEA"
                     component="privilege-foreign-transfer-eea-edit"
                     :readonly="readonly">
                 </privilege-section-wrapper>
@@ -324,11 +324,19 @@ Vue.component('consent-view', {
                     </dd>
                 </template>
                 <template v-if="consent.scope_details.scopeGroupType === 'pis'
-                    && privilege['pis:eea']">
+                    && privilege['pis:EEA']">
                     <dt class="col-sm-3">EEA Transfer</dt>
                     <dd class="col-sm-9">
-                        <privilege-foreign-transfer-eea-view :privilege="privilege['pis:eea']">
+                        <privilege-foreign-transfer-eea-view :privilege="privilege['pis:EEA']">
                         </privilege-foreign-transfer-eea-view>
+                    </dd>
+                </template>
+                <template v-if="consent.scope_details.scopeGroupType === 'pis'
+                    && privilege['pis:nonEEA']">
+                    <dt class="col-sm-3">Non EEA Transfer</dt>
+                    <dd class="col-sm-9">
+                        <privilege-foreign-transfer-non-eea-view :privilege="privilege['pis:nonEEA']">
+                        </privilege-foreign-transfer-non-eea-view>
                     </dd>
                 </template>
             </dl>
