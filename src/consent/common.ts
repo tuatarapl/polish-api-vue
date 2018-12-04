@@ -322,7 +322,15 @@ Vue.component('consent-view', {
                         <privilege-domestic-transfer-view :privilege="privilege['pis:domestic']">
                         </privilege-domestic-transfer-view>
                     </dd>
-            </template>
+                </template>
+                <template v-if="consent.scope_details.scopeGroupType === 'pis'
+                    && privilege['pis:eea']">
+                    <dt class="col-sm-3">EEA Transfer</dt>
+                    <dd class="col-sm-9">
+                        <privilege-foreign-transfer-eea-view :privilege="privilege['pis:eea']">
+                        </privilege-foreign-transfer-eea-view>
+                    </dd>
+                </template>
             </dl>
         </dd>
     </template>
