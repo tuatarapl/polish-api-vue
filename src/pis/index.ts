@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import './edit'
 import './view'
 Vue.component('recipient-pis-edit', {
     props: ['value', 'readonly'],
