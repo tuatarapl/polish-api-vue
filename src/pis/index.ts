@@ -306,7 +306,7 @@ Vue.component('us-info-edit', {
                 v-model="value.payerInfo.payorId" :readonly="readonly"/>
         </div>
         <div class="form-group">
-            <label for="payorIdType">Payor Id< Type</label>
+            <label for="payorIdType">Payor Id Type</label>
             <select type="text" class="form-control" id="payorIdType"
                 v-model="value.payerInfo.payorIdType" :disabled="readonly">
                 <option>N</option>
