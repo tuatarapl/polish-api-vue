@@ -3,7 +3,7 @@ import Vue from 'vue'
 Vue.component('scope-usage-limit-view', {
     props: ['scopeUsageLimit'],
     template: `
-<dl>
+<dl class="row" >
     <dt class="col-sm-4">Scope Usage Limit</dt>
     <dd class="col-sm-8">{{scopeUsageLimit}}</dd>
 </dl>
@@ -158,7 +158,7 @@ Vue.component('transfer-data-view', {
 Vue.component('delivery-mode-view', {
     props: ['deliveryMode'],
     template: `
-<dl>
+<dl class="row" >
     <dt class="col-sm-4">Delivery Mode</dt>
     <dd class="col-sm-8">{{deliveryMode}}</dd>
 </dl>
@@ -168,7 +168,7 @@ Vue.component('delivery-mode-view', {
 Vue.component('system-view', {
     props: ['system'],
     template: `
-<dl>
+<dl class="row" >
     <dt class="col-sm-4">System</dt>
     <dd class="col-sm-8">{{system}}</dd>
 </dl>
@@ -178,7 +178,7 @@ Vue.component('system-view', {
 Vue.component('execution-mode-view', {
     props: ['executionMode'],
     template: `
-<dl>
+<dl class="row" >
     <dt class="col-sm-4">Execution Mode</dt>
     <dd class="col-sm-8">{{executionMode}}</dd>
 </dl>
