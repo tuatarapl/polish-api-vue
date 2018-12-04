@@ -4,8 +4,8 @@ Vue.component('scope-usage-limit-view', {
     props: ['scopeUsageLimit'],
     template: `
 <dl>
-    <dt class="col-sm-3">Scope Usage Limit</dt>
-    <dd class="col-sm-9">{{scopeUsageLimit}}</dd>
+    <dt class="col-sm-4">Scope Usage Limit</dt>
+    <dd class="col-sm-8">{{scopeUsageLimit}}</dd>
 </dl>
 `
 })
@@ -159,8 +159,8 @@ Vue.component('delivery-mode-view', {
     props: ['deliveryMode'],
     template: `
 <dl>
-    <dt class="col-sm-3">Delivery Mode</dt>
-    <dd class="col-sm-9">{{deliveryMode}}</dd>
+    <dt class="col-sm-4">Delivery Mode</dt>
+    <dd class="col-sm-8">{{deliveryMode}}</dd>
 </dl>
 `
 })
@@ -169,8 +169,8 @@ Vue.component('system-view', {
     props: ['system'],
     template: `
 <dl>
-    <dt class="col-sm-3">System</dt>
-    <dd class="col-sm-9">{{system}}</dd>
+    <dt class="col-sm-4">System</dt>
+    <dd class="col-sm-8">{{system}}</dd>
 </dl>
 `
 })
@@ -179,8 +179,8 @@ Vue.component('execution-mode-view', {
     props: ['executionMode'],
     template: `
 <dl>
-    <dt class="col-sm-3">Execution Mode</dt>
-    <dd class="col-sm-9">{{executionMode}}</dd>
+    <dt class="col-sm-4">Execution Mode</dt>
+    <dd class="col-sm-8">{{executionMode}}</dd>
 </dl>
 `
 })
