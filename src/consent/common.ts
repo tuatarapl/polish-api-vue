@@ -315,6 +315,14 @@ Vue.component('consent-view', {
                         </privilege-ais-aspsp-in-simple-view>
                     </dd>
                 </template>
+                <template v-if="consent.scope_details.scopeGroupType === 'pis'
+                    && privilege['pis:domestic']">
+                    <dt class="col-sm-3">Domestic Transfer</dt>
+                    <dd class="col-sm-9">
+                        <privilege-domestic-transfer-view :privilege="privilege['pis:domestic']">
+                        </privilege-domestic-transfer-view>
+                    </dd>
+            </template>
             </dl>
         </dd>
     </template>
