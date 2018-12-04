@@ -174,3 +174,13 @@ Vue.component('system-view', {
 </dl>
 `
 })
+
+Vue.component('execution-mode-view', {
+    props: ['executionMode'],
+    template: `
+<dl>
+    <dt class="col-sm-3">Execution Mode</dt>
+    <dd class="col-sm-9">{{executionMode}}</dd>
+</dl>
+`
+})
