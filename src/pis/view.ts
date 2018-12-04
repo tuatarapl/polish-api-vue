@@ -74,10 +74,22 @@ Vue.component('sender-pis-domestic-view', {
         </dd>
     </dl>
 </section>
-`,
-    methods: {
-        doInitialize() {
-            this.$emit('input', {nameAddress: {value: []}})
-        }
-    }
+`
+})
+
+Vue.component('sender-pis-foreign-view', {
+    props: ['sender'],
+    template: `
+<section class="ml-4" v-if="sender">
+    <header>Sender</header>
+    <dl class="row" v-if="sender.accountNumber">
+        <dt class="col-4">Account Number</dt>
+        <dd class="col-8"> {{sender.accountNumber}}</dd>
+    </dl>
+    <dl class="row" v-if="sender.name">
+        <dt class="col-4">Name</dt>
+        <dd class="col-8"> {{sender.name}}</dd>
+    </dl>
+</section>
+`
 })
