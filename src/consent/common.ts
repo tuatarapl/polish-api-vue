@@ -339,6 +339,14 @@ Vue.component('consent-view', {
                         </privilege-foreign-transfer-non-eea-view>
                     </dd>
                 </template>
+                <template v-if="consent.scope_details.scopeGroupType === 'pis'
+                    && privilege['pis:tax']">
+                    <dt class="col-sm-3">Tax Transfer</dt>
+                    <dd class="col-sm-9">
+                        <privilege-tax-transfer-view :privilege="privilege['pis:tax']">
+                        </privilege-tax-transfer-view>
+                    </dd>
+                </template>
             </dl>
         </dd>
     </template>
