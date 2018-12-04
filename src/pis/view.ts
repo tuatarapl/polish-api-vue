@@ -155,6 +155,39 @@ Vue.component('transfer-data-view', {
 `
 })
 
+Vue.component('bank-view', {
+    props: ['bank'],
+    template: `
+<section class="ml-4" v-if="bank">
+    <header>Bank</header>
+    <dl class="row" v-if="bank.bicOrSwift">
+        <dt class="col-4">BIC or SWIFT</dt>
+        <dd class="col-8"> {{bank.bicOrSwift}}</dd>
+    </dl>
+    <dl class="row" v-if="bank.name">
+        <dt class="col-4">Name</dt>
+        <dd class="col-8"> {{bank.name}}</dd>
+    </dl>
+    <dl class="row" v-if="bank.code">
+        <dt class="col-4">Code</dt>
+        <dd class="col-8"> {{bank.code}}</dd>
+    </dl>
+    <dl class="row" v-if="bank.countryCode">
+        <dt class="col-4">Country Code</dt>
+        <dd class="col-8"> {{bank.countryCode}}</dd>
+    </dl>
+    <dl class="row" v-if="bank.address">
+        <dt class="col-4">Address</dt>
+        <dd class="col-8">
+            <ul class="list-unstyled">
+                <li v-for="item in bank.address">{{item}}</li>
+            </ul>
+        </dd>
+    </dl>
+</section>
+`
+})
+
 Vue.component('delivery-mode-view', {
     props: ['deliveryMode'],
     template: `
