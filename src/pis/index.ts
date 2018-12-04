@@ -224,7 +224,7 @@ Vue.component('transfer-data-edit', {
                 v-model="value.executionDate" :readonly="readonly"/>
         </div>
         <h3>Recurrence</h3>
-        <recurrence-edit v-model="value.recurrence"></recurrence-edit>
+        <recurrence-edit v-model="value.recurrence" :readonly="readonly"></recurrence-edit>
         <div class="form-group">
             <label for="currency">Currency</label>
             <input type="text" class="form-control" id="currency"
