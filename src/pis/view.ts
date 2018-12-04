@@ -188,6 +188,43 @@ Vue.component('bank-view', {
 `
 })
 
+Vue.component('us-info-view', {
+    props: ['usInfo'],
+    template: `
+<section class="ml-4" v-if="usInfo">
+    <header>Us Info</header>
+    <dl class="row" v-if="usInfo.payerInfo && usInfo.payerInfo.payorId">
+        <dt class="col-4">Payor Id</dt>
+        <dd class="col-8"> {{usInfo.payerInfo.payorId}}</dd>
+    </dl>
+    <dl class="row" v-if="usInfo.payerInfo && usInfo.payerInfo.payorIdType">
+        <dt class="col-4">Payor Id Type</dt>
+        <dd class="col-8"> {{usInfo.payerInfo.payorIdType}}</dd>
+    </dl>
+    <dl class="row" v-if="usInfo.formCode">
+        <dt class="col-4">Form Code</dt>
+        <dd class="col-8"> {{usInfo.formCode}}</dd>
+    </dl>
+    <dl class="row" v-if="usInfo.periodId">
+        <dt class="col-4">Period Id</dt>
+        <dd class="col-8"> {{usInfo.periodId}}</dd>
+    </dl>
+    <dl class="row" v-if="usInfo.periodType">
+        <dt class="col-4">Period Type</dt>
+        <dd class="col-8"> {{usInfo.periodType}}</dd>
+    </dl>
+    <dl class="row" v-if="usInfo.year">
+        <dt class="col-4">Year</dt>
+        <dd class="col-8"> {{usInfo.year}}</dd>
+    </dl>
+    <dl class="row" v-if="usInfo.obligationId">
+        <dt class="col-4">Obligation Id</dt>
+        <dd class="col-8"> {{usInfo.obligationId}}</dd>
+    </dl>
+</section>
+`
+})
+
 Vue.component('delivery-mode-view', {
     props: ['deliveryMode'],
     template: `
