@@ -284,3 +284,43 @@ Vue.component('payment-id-view', {
 </dl>
 `
 })
+
+Vue.component('transfers-total-amount-view', {
+    props: ['transfersTotalAmount'],
+    template: `
+<dl class="row" >
+    <dt class="col-sm-4">Transfers Total Amount</dt>
+    <dd class="col-sm-8">{{transfersTotalAmount}}</dd>
+</dl>
+`
+})
+
+Vue.component('type-of-transfers-view', {
+    props: ['typeOfTransfers'],
+    template: `
+<dl class="row" >
+    <dt class="col-sm-4">Type Of Transfers</dt>
+    <dd class="col-sm-8">{{typeOfTransfers}}</dd>
+</dl>
+`
+})
+
+Vue.component('tpp-transaction-id-view', {
+    props: ['tppTransactionId'],
+    template: `
+<dl class="row" >
+    <dt class="col-sm-4">TPP Transaction Id</dt>
+    <dd class="col-sm-8">{{tppTransactionId}}</dd>
+</dl>
+`
+})
+
+Vue.component('hold-view', {
+    props: ['hold'],
+    template: `
+<dl class="row" >
+    <dt class="col-sm-4">Hold</dt>
+    <dd class="col-sm-8">{{hold}}</dd>
+</dl>
+`
+})
