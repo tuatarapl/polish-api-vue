@@ -3,10 +3,10 @@ import Vue from 'vue'
 Vue.component('scope-usage-limit-view', {
     props: ['scopeUsageLimit'],
     template: `
-<div>
+<dl>
     <dt class="col-sm-3">Scope Usage Limit</dt>
     <dd class="col-sm-9">{{scopeUsageLimit}}</dd>
-</div>
+</dl>
 `
 })
 
@@ -152,5 +152,15 @@ Vue.component('transfer-data-view', {
         <dd class="col-8"> {{transferData.currency}}</dd>
     </dl>
 </section>
+`
+})
+
+Vue.component('delivery-mode-view', {
+    props: ['deliveryMode'],
+    template: `
+<dl>
+    <dt class="col-sm-3">Delivery Mode</dt>
+    <dd class="col-sm-9">{{deliveryMode}}</dd>
+</dl>
 `
 })
