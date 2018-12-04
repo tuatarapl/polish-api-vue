@@ -93,3 +93,64 @@ Vue.component('sender-pis-foreign-view', {
 </section>
 `
 })
+
+Vue.component('frequency-view', {
+    props: ['frequency'],
+    template: `
+<section class="ml-4" v-if="frequency">
+    <header>Frequency</header>
+    <dl class="row" v-if="frequency.periodType">
+        <dt class="col-4">Period Type</dt>
+        <dd class="col-8"> {{frequency.periodType}}</dd>
+    </dl>
+    <dl class="row" v-if="frequency.periodValue">
+        <dt class="col-4">Period Value</dt>
+        <dd class="col-8"> {{frequency.periodValue}}</dd>
+    </dl>
+</section>
+`
+})
+
+Vue.component('recurrence-view', {
+    props: ['recurrence'],
+    template: `
+<section class="ml-4" v-if="recurrence">
+    <header>Recurrence</header>
+    <dl class="row" v-if="recurrence.startDate">
+        <dt class="col-4">Start Date</dt>
+        <dd class="col-8"> {{recurrence.startDate}}</dd>
+    </dl>
+    <frequency-view :frequency="recurrence.frequency"></frequency-view>
+    <dl class="row" v-if="recurrence.dayOffOffsetType">
+        <dt class="col-4">Day Offset Type</dt>
+        <dd class="col-8"> {{recurrence.dayOffOffsetType}}</dd>
+    </dl>
+</section>
+`
+})
+
+Vue.component('transfer-data-view', {
+    props: ['transferData'],
+    template: `
+<section class="ml-4" v-if="transferData">
+    <header>Transfer Data</header>
+    <dl class="row" v-if="transferData.description">
+        <dt class="col-4">Description</dt>
+        <dd class="col-8"> {{transferData.description}}</dd>
+    </dl>
+    <dl class="row" v-if="transferData.amount">
+        <dt class="col-4">Amount</dt>
+        <dd class="col-8"> {{transferData.amount}}</dd>
+    </dl>
+    <dl class="row" v-if="transferData.executionDate">
+        <dt class="col-4">Execution Date</dt>
+        <dd class="col-8"> {{transferData.executionDate}}</dd>
+    </dl>
+    <recurrence-view :recurrence="transferData.recurrence"></recurrence-view>
+    <dl class="row" v-if="transferData.currency">
+        <dt class="col-4">Currency</dt>
+        <dd class="col-8"> {{transferData.currency}}</dd>
+    </dl>
+</section>
+`
+})
