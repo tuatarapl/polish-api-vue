@@ -264,3 +264,23 @@ Vue.component('transfer-charges-view', {
 </dl>
 `
 })
+
+Vue.component('bundle-id-view', {
+    props: ['bundleId'],
+    template: `
+<dl class="row" >
+    <dt class="col-sm-4">Bundle Id</dt>
+    <dd class="col-sm-8">{{bundleId}}</dd>
+</dl>
+`
+})
+
+Vue.component('payment-id-view', {
+    props: ['paymentId'],
+    template: `
+<dl class="row" >
+    <dt class="col-sm-4">Payment Id</dt>
+    <dd class="col-sm-8">{{paymentId}}</dd>
+</dl>
+`
+})
