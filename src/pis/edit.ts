@@ -3,7 +3,6 @@ Vue.component('domestic-transfer-edit', {
     props: ['privilege', 'readonly'],
     template: `
 <div v-if="privilege">
-    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
     <h2>Recipient</h2>
     <recipient-pis-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-edit>
     <h2>Sender</h2>
@@ -23,7 +22,6 @@ Vue.component('foreign-transfer-eea-edit', {
     props: ['privilege', 'readonly'],
     template: `
 <div v-if="privilege">
-    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
     <h2>Recipient</h2>
     <recipient-pis-foreign-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-foreign-edit>
     <h2>Sender</h2>
@@ -43,7 +41,6 @@ Vue.component('foreign-transfer-non-eea-edit', {
     props: ['privilege', 'readonly'],
     template: `
 <div v-if="privilege">
-    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
     <h2>Recipient</h2>
     <recipient-pis-foreign-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-foreign-edit>
     <h2>Recipient Bank</h2>
@@ -66,7 +63,6 @@ Vue.component('tax-transfer-edit', {
     props: ['privilege', 'readonly'],
     template: `
 <div v-if="privilege">
-    <scope-usage-limit-edit v-model="privilege.scopeUsageLimit" :readonly="readonly"></scope-usage-limit-edit>
     <h2>Recipient</h2>
     <recipient-pis-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-edit>
     <h2>Sender</h2>
