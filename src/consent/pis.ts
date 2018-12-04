@@ -233,6 +233,77 @@ Vue.component('privilege-tax-transfer-view', {
     `
 })
 
+Vue.component('domestic-transfer-view', {
+    props: ['privilege'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-view :scopeUsageLimit="privilege.scopeUsageLimit"></scope-usage-limit-view>
+    <recipient-pis-view :recipient="privilege.recipient" ></recipient-pis-view>
+    <sender-pis-domestic-view :sender="privilege.sender"></sender-pis-domestic-view>
+    <transfer-data-view :transferData="privilege.transferData"></transfer-data-view>
+    <tpp-transaction-id-view :tppTransactionId="privilege.tppTransactionId"></tpp-transaction-id-view>
+    <delivery-mode-view :deliveryMode="privilege.deliveryMode"></delivery-mode-view>
+    <system-view :system="privilege.system"></system-view>
+    <hold-view :hold="privilege.hold"></hold-view>
+    <execution-mode-view :executionMode="privilege.executionMode"></execution-mode-view>
+</div>
+    `
+})
+
+Vue.component('foreign-transfer-eea-view', {
+    props: ['privilege'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-view :scopeUsageLimit="privilege.scopeUsageLimit"></scope-usage-limit-view>
+    <recipient-pis-foreign-view :recipient="privilege.recipient" ></recipient-pis-foreign-view>
+    <sender-pis-foreign-view :sender="privilege.sender"></sender-pis-foreign-view>
+    <transfer-data-view :transferData="privilege.transferData"></transfer-data-view>
+    <tpp-transaction-id-view :tppTransactionId="privilege.tppTransactionId"></tpp-transaction-id-view>
+    <delivery-mode-view :deliveryMode="privilege.deliveryMode"></delivery-mode-view>
+    <system-view :system="privilege.system"></system-view>
+    <hold-view :hold="privilege.hold"></hold-view>
+    <execution-mode-view :executionMode="privilege.executionMode"></execution-mode-view>
+</div>
+    `
+})
+
+Vue.component('foreign-transfer-non-eea-view', {
+    props: ['privilege'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-view :scopeUsageLimit="privilege.scopeUsageLimit"></scope-usage-limit-view>
+    <recipient-pis-foreign-view :recipient="privilege.recipient" ></recipient-pis-foreign-view>
+    <bank-view :bank="privilege.recipientBank"></bank-view>
+    <sender-pis-foreign-view :sender="privilege.sender"></sender-pis-foreign-view>
+    <transfer-data-view :transferData="privilege.transferData"></transfer-data-view>
+    <transfer-charges-view :transferCharges="privilege.transferCharges"></transfer-charges-view>
+    <tpp-transaction-id-view :tppTransactionId="privilege.tppTransactionId"></tpp-transaction-id-view>
+    <delivery-mode-view :deliveryMode="privilege.deliveryMode"></delivery-mode-view>
+    <system-view :system="privilege.system"></system-view>
+    <hold-view :hold="privilege.hold"></hold-view>
+    <execution-mode-view :executionMode="privilege.executionMode"></execution-mode-view>
+</div>
+    `
+})
+
+Vue.component('tax-transfer-view', {
+    props: ['privilege'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-view :scopeUsageLimit="privilege.scopeUsageLimit"></scope-usage-limit-view>
+    <recipient-pis-view :recipient="privilege.recipient" ></recipient-pis-view>
+    <sender-pis-domestic-view :sender="privilege.sender"></sender-pis-domestic-view>
+    <transfer-data-view :transferData="privilege.transferData"></transfer-data-view>
+    <us-info-view :usInfo="privilege.usInfo"></us-info-view>
+    <tpp-transaction-id-view :tppTransactionId="privilege.tppTransactionId"></tpp-transaction-id-view>
+    <delivery-mode-view :deliveryMode="privilege.deliveryMode"></delivery-mode-view>
+    <system-view :system="privilege.system"></system-view>
+    <hold-view :hold="privilege.hold"></hold-view>
+    <execution-mode-view :executionMode="privilege.executionMode"></execution-mode-view>
+</div>
+    `
+})
+
 Vue.component('privilege-cancel-payment-view', {
     props: ['privilege'],
     template: `
@@ -240,6 +311,43 @@ Vue.component('privilege-cancel-payment-view', {
     <scope-usage-limit-view :scopeUsageLimit="privilege.scopeUsageLimit"></scope-usage-limit-view>
     <payment-id-view :paymentId="privilege.paymentId"></payment-id-view>
     <bundle-id-view :bundleId="privilege.bundleId"></bundle-id-view>
+</div>
+    `
+})
+
+Vue.component('transfers-view', {
+    props: ['transfers', 'component', 'header'],
+    template: `
+<section>
+    <header>{{header}}</header>
+    <ul class="list-group">
+        <li v-for="item in transfers" class="list-group-item">
+            <component :is="component" :privilege="item"></component>
+        </li>
+    </ul>
+</section>
+`
+})
+
+Vue.component('privilege-bundle-transfers-view', {
+    props: ['privilege'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-view :scopeUsageLimit="privilege.scopeUsageLimit"></scope-usage-limit-view>
+    <transfers-total-amount-view' :transfersTotalAmount="privilege.transfersTotalAmount"></transfers-total-amount-view'>
+    <type-of-transfers-view :typeOfTransfers="privilege.typeOfTransfers"></type-of-transfers-view>
+    <transfers-view :transfers="privilege.domesticTransfers"
+        component="domestic-transfer-view" header="Domestic Transfers">
+    </transfers-view>
+    <transfers-view :transfers="privilege.EEATransfers"
+        component="foreign-transfer-eea-view" header="EEA Transfers">
+    </transfers-view>
+    <transfers-view :transfers="privilege.nonEEATransfers"
+        component="foreign-transfer-non-eea-view" header="Non EEA Transfers">
+    </transfers-view>
+    <transfers-view :transfers="privilege.taxTransfers"
+        component="tax-transfer-view" header="Tax Transfers">
+    </transfers-view>
 </div>
     `
 })

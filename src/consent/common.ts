@@ -355,6 +355,14 @@ Vue.component('consent-view', {
                         </privilege-cancel-payment-view>
                     </dd>
                 </template>
+                <template v-if="consent.scope_details.scopeGroupType === 'pis'
+                    && privilege['pis:bundle']">
+                    <dt class="col-sm-3">Bundle Transfers</dt>
+                    <dd class="col-sm-9">
+                        <privilege-bundle-transfers-view :privilege="privilege['pis:bundle']">
+                        </privilege-bundle-transfers-view>
+                    </dd>
+                </template>
             </dl>
         </dd>
     </template>
