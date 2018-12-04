@@ -1,83 +1,151 @@
 import Vue from 'vue'
 Vue.component('domestic-transfer-edit', {
-    props: ['privilege', 'readonly'],
+    props: ['request', 'readonly'],
     template: `
-<div v-if="privilege">
+<div v-if="request">
     <h2>Recipient</h2>
-    <recipient-pis-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-edit>
+    <recipient-pis-edit v-model="request.recipient" :readonly="readonly"></recipient-pis-edit>
     <h2>Sender</h2>
-    <sender-pis-domestic-edit v-model="privilege.sender" :readonly="readonly"></sender-pis-domestic-edit>
+    <sender-pis-domestic-edit v-model="request.sender" :readonly="readonly"></sender-pis-domestic-edit>
     <h2>Transfer Data</h2>
-    <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
-    <tpp-transaction-id-edit v-model="privilege.tppTransactionId" :readonly="readonly"></tpp-transaction-id-edit>
-    <delivery-mode-edit v-model="privilege.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
-    <system-edit v-model="privilege.system" kind="domestic" :readonly="readonly"></system-edit>
-    <hold-edit v-model="privilege.hold" :readonly="readonly"></hold-edit>
-    <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
+    <transfer-data-edit v-model="request.transferData" :readonly="readonly"></transfer-data-edit>
+    <tpp-transaction-id-edit v-model="request.tppTransactionId" :readonly="readonly"></tpp-transaction-id-edit>
+    <delivery-mode-edit v-model="request.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
+    <system-edit v-model="request.system" kind="domestic" :readonly="readonly"></system-edit>
+    <hold-edit v-model="request.hold" :readonly="readonly"></hold-edit>
+    <execution-mode-edit v-model="request.executionMode" :readonly="readonly"></execution-mode-edit>
 </div>
     `
 })
 
 Vue.component('foreign-transfer-eea-edit', {
-    props: ['privilege', 'readonly'],
+    props: ['request', 'readonly'],
     template: `
-<div v-if="privilege">
+<div v-if="request">
     <h2>Recipient</h2>
-    <recipient-pis-foreign-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-foreign-edit>
+    <recipient-pis-foreign-edit v-model="request.recipient" :readonly="readonly"></recipient-pis-foreign-edit>
     <h2>Sender</h2>
-    <sender-pis-foreign-edit v-model="privilege.sender" :readonly="readonly"></sender-pis-foreign-edit>
+    <sender-pis-foreign-edit v-model="request.sender" :readonly="readonly"></sender-pis-foreign-edit>
     <h2>Transfer Data</h2>
-    <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
-    <tpp-transaction-id-edit v-model="privilege.tppTransactionId" :readonly="readonly"></tpp-transaction-id-edit>
-    <delivery-mode-edit v-model="privilege.deliveryMode" kind="eea" :readonly="readonly"></delivery-mode-edit>
-    <system-edit v-model="privilege.system" kind="eea" :readonly="readonly"></system-edit>
-    <hold-edit v-model="privilege.hold" :readonly="readonly"></hold-edit>
-    <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
+    <transfer-data-edit v-model="request.transferData" :readonly="readonly"></transfer-data-edit>
+    <tpp-transaction-id-edit v-model="request.tppTransactionId" :readonly="readonly"></tpp-transaction-id-edit>
+    <delivery-mode-edit v-model="request.deliveryMode" kind="eea" :readonly="readonly"></delivery-mode-edit>
+    <system-edit v-model="request.system" kind="eea" :readonly="readonly"></system-edit>
+    <hold-edit v-model="request.hold" :readonly="readonly"></hold-edit>
+    <execution-mode-edit v-model="request.executionMode" :readonly="readonly"></execution-mode-edit>
 </div>
     `
 })
 
 Vue.component('foreign-transfer-non-eea-edit', {
-    props: ['privilege', 'readonly'],
+    props: ['request', 'readonly'],
     template: `
-<div v-if="privilege">
+<div v-if="request">
     <h2>Recipient</h2>
-    <recipient-pis-foreign-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-foreign-edit>
+    <recipient-pis-foreign-edit v-model="request.recipient" :readonly="readonly"></recipient-pis-foreign-edit>
     <h2>Recipient Bank</h2>
-    <bank-edit v-model="privilege.recipientBank" :readonly="readonly"></bank-edit>
+    <bank-edit v-model="request.recipientBank" :readonly="readonly"></bank-edit>
     <h2>Sender</h2>
-    <sender-pis-foreign-edit v-model="privilege.sender" :readonly="readonly"></sender-pis-foreign-edit>
+    <sender-pis-foreign-edit v-model="request.sender" :readonly="readonly"></sender-pis-foreign-edit>
     <h2>Transfer Data</h2>
-    <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
-    <transfer-charges-edit v-model="privilege.transferCharges" :readonly="readonly"></transfer-charges-edit>
-    <tpp-transaction-id-edit v-model="privilege.tppTransactionId" :readonly="readonly"></tpp-transaction-id-edit>
-    <delivery-mode-edit v-model="privilege.deliveryMode" kind="non-eea" :readonly="readonly"></delivery-mode-edit>
-    <system-edit v-model="privilege.system" kind="non-eea" :readonly="readonly"></system-edit>
-    <hold-edit v-model="privilege.hold" :readonly="readonly"></hold-edit>
-    <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
+    <transfer-data-edit v-model="request.transferData" :readonly="readonly"></transfer-data-edit>
+    <transfer-charges-edit v-model="request.transferCharges" :readonly="readonly"></transfer-charges-edit>
+    <tpp-transaction-id-edit v-model="request.tppTransactionId" :readonly="readonly"></tpp-transaction-id-edit>
+    <delivery-mode-edit v-model="request.deliveryMode" kind="non-eea" :readonly="readonly"></delivery-mode-edit>
+    <system-edit v-model="request.system" kind="non-eea" :readonly="readonly"></system-edit>
+    <hold-edit v-model="request.hold" :readonly="readonly"></hold-edit>
+    <execution-mode-edit v-model="request.executionMode" :readonly="readonly"></execution-mode-edit>
 </div>
     `
 })
 
 Vue.component('tax-transfer-edit', {
-    props: ['privilege', 'readonly'],
+    props: ['request', 'readonly'],
     template: `
-<div v-if="privilege">
+<div v-if="request">
     <h2>Recipient</h2>
-    <recipient-pis-edit v-model="privilege.recipient" :readonly="readonly"></recipient-pis-edit>
+    <recipient-pis-edit v-model="request.recipient" :readonly="readonly"></recipient-pis-edit>
     <h2>Sender</h2>
-    <sender-pis-domestic-edit v-model="privilege.sender" :readonly="readonly"></sender-pis-domestic-edit>
+    <sender-pis-domestic-edit v-model="request.sender" :readonly="readonly"></sender-pis-domestic-edit>
     <h2>Transfer Data</h2>
-    <transfer-data-edit v-model="privilege.transferData" :readonly="readonly"></transfer-data-edit>
+    <transfer-data-edit v-model="request.transferData" :readonly="readonly"></transfer-data-edit>
     <h2>Us Info</h2>
-    <us-info-edit v-model="privilege.usInfo" :readonly="readonly"></us-info-edit>
-    <tpp-transaction-id-edit v-model="privilege.tppTransactionId" :readonly="readonly"></tpp-transaction-id-edit>
-    <delivery-mode-edit v-model="privilege.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
-    <system-edit v-model="privilege.system" kind="domestic" :readonly="readonly"></system-edit>
-    <hold-edit v-model="privilege.hold" :readonly="readonly"></hold-edit>
-    <execution-mode-edit v-model="privilege.executionMode" :readonly="readonly"></execution-mode-edit>
+    <us-info-edit v-model="request.usInfo" :readonly="readonly"></us-info-edit>
+    <tpp-transaction-id-edit v-model="request.tppTransactionId" :readonly="readonly"></tpp-transaction-id-edit>
+    <delivery-mode-edit v-model="request.deliveryMode" kind="domestic" :readonly="readonly"></delivery-mode-edit>
+    <system-edit v-model="request.system" kind="domestic" :readonly="readonly"></system-edit>
+    <hold-edit v-model="request.hold" :readonly="readonly"></hold-edit>
+    <execution-mode-edit v-model="request.executionMode" :readonly="readonly"></execution-mode-edit>
 </div>
     `
+})
+
+Vue.component('bundle-transfers-edit', {
+    props: ['request', 'readonly'],
+    template: `
+<div v-if="request">
+    <tpp-bundle-id-edit v-model="request.tppBundleId" :readonly="readonly">
+    </tpp-bundle-id-edit>
+    <transfers-total-amount-edit v-model="request.transfersTotalAmount" :readonly="readonly">
+    </transfers-total-amount-edit>
+    <type-of-transfers-edit v-model="request.typeOfTransfers" :readonly="readonly">
+    </type-of-transfers-edit>
+    <h2>Domestic Transfers</h2>
+    <transfers-edit class="mb-4" component="domestic-transfer-edit"
+        v-model="request.domesticTransfers" :readonly="readonly">
+    </transfers-edit>
+    <h2>EEA Transfers</h2>
+    <transfers-edit class="mb-4" component="foreign-transfer-eea-edit"
+        v-model="request.EEATransfers" :readonly="readonly">
+    </transfers-edit>
+    <h2>Non EEA Transfers</h2>
+    <transfers-edit class="mb-4" component="foreign-transfer-non-eea-edit"
+        v-model="request.nonEEATransfers" :readonly="readonly">
+    </transfers-edit>
+    <h2>Tax Transfers</h2>
+    <transfers-edit  class="mb-4" component="tax-transfer-edit"
+        v-model="request.taxTransfers" :readonly="readonly">
+    </transfers-edit>
+</div>
+    `
+})
+
+Vue.component('type-of-transfers-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="form-group">
+    <label for="typeOfTransfers">Type of Transfers</label>
+    <select type="text" class="form-control" id="typeOfTransfers"
+        :value="value" @input="$emit('input',$event.target.value)" :disabled="readonly">
+        <option>domestic</option>
+        <option>EEA</option>
+        <option>nonEEA</option>
+        <option>tax</option>
+    </select>
+</div>
+`
+})
+
+Vue.component('transfers-total-amount-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="form-group">
+    <label for="transfersTotalAmount">Transfers Total Amount</label>
+    <input type="text" class="form-control" id="transfersTotalAmount"
+        :value="value" @input="$emit('input',$event.target.value)" :readonly="readonly"/>
+</div>
+`
+})
+
+Vue.component('tpp-bundle-id-edit', {
+    props: ['value', 'readonly'],
+    template: `
+<div class="form-group">
+    <label for="tppBundleId">Tpp Bundle Id</label>
+    <input type="text" class="form-control" id="tppBundleId"
+        :value="value" @input="$emit('input',$event.target.value)" :readonly="readonly"/>
+</div>
+`
 })
 
 Vue.component('transfer-charges-edit', {

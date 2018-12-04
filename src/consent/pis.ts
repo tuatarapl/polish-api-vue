@@ -104,7 +104,7 @@ Vue.component('transfers-edit', {
     template: `
 <ul class="list-group">
     <li v-for="(item, index) in value" class="list-group-item">
-        <component :is="component" :privilege="item" :readonly="readonly"></component>
+        <component :is="component" :request="item" :readonly="readonly"></component>
         <button type="button" class="btn btn-primary" @click="doRemove(index)">
             Remove
         </button>
