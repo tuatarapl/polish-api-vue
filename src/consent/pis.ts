@@ -150,19 +150,19 @@ Vue.component('privilege-bundle-transfers-edit', {
             <option>tax</option>
         </select>
         <h2>Domestic Transfers</h2>
-        <transfers-edit class="mb-4" component="privilege-domestic-transfer-edit"
+        <transfers-edit class="mb-4" component="domestic-transfer-edit"
             v-model="privilege.domesticTransfers" :readonly="readonly">
         </transfers-edit>
         <h2>EEA Transfers</h2>
-        <transfers-edit class="mb-4" component="privilege-foreign-transfer-eea-edit"
+        <transfers-edit class="mb-4" component="foreign-transfer-eea-edit"
             v-model="privilege.EEATransfers" :readonly="readonly">
         </transfers-edit>
         <h2>Non EEA Transfers</h2>
-        <transfers-edit class="mb-4" component="privilege-foreign-transfer-non-eea-edit"
+        <transfers-edit class="mb-4" component="foreign-transfer-non-eea-edit"
             v-model="privilege.nonEEATransfers" :readonly="readonly">
         </transfers-edit>
         <h2>Tax Transfers</h2>
-        <transfers-edit  class="mb-4" component="privilege-tax-transfer-edit"
+        <transfers-edit  class="mb-4" component="tax-transfer-edit"
             v-model="privilege.taxTransfers" :readonly="readonly">
         </transfers-edit>
     </div>
@@ -334,7 +334,7 @@ Vue.component('privilege-bundle-transfers-view', {
     template: `
 <div v-if="privilege">
     <scope-usage-limit-view :scopeUsageLimit="privilege.scopeUsageLimit"></scope-usage-limit-view>
-    <transfers-total-amount-view' :transfersTotalAmount="privilege.transfersTotalAmount"></transfers-total-amount-view'>
+    <transfers-total-amount-view :transfersTotalAmount="privilege.transfersTotalAmount"></transfers-total-amount-view'>
     <type-of-transfers-view :typeOfTransfers="privilege.typeOfTransfers"></type-of-transfers-view>
     <transfers-view :transfers="privilege.domesticTransfers"
         component="domestic-transfer-view" header="Domestic Transfers">
