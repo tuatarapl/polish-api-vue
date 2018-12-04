@@ -164,3 +164,13 @@ Vue.component('delivery-mode-view', {
 </dl>
 `
 })
+
+Vue.component('system-view', {
+    props: ['system'],
+    template: `
+<dl>
+    <dt class="col-sm-3">System</dt>
+    <dd class="col-sm-9">{{system}}</dd>
+</dl>
+`
+})
