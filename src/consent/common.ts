@@ -347,6 +347,14 @@ Vue.component('consent-view', {
                         </privilege-tax-transfer-view>
                     </dd>
                 </template>
+                <template v-if="consent.scope_details.scopeGroupType === 'pis'
+                    && privilege['pis:cancelPayment']">
+                    <dt class="col-sm-3">Cancel Payment</dt>
+                    <dd class="col-sm-9">
+                        <privilege-cancel-payment-view :privilege="privilege['pis:cancelPayment']">
+                        </privilege-cancel-payment-view>
+                    </dd>
+                </template>
             </dl>
         </dd>
     </template>

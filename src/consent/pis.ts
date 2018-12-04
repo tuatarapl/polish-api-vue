@@ -232,3 +232,14 @@ Vue.component('privilege-tax-transfer-view', {
 </div>
     `
 })
+
+Vue.component('privilege-cancel-payment-view', {
+    props: ['privilege'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-view :scopeUsageLimit="privilege.scopeUsageLimit"></scope-usage-limit-view>
+    <payment-id-view :paymentId="privilege.paymentId"></payment-id-view>
+    <bundle-id-view :bundleId="privilege.bundleId"></bundle-id-view>
+</div>
+    `
+})
