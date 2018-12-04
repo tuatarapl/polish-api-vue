@@ -169,3 +169,18 @@ Vue.component('privilege-bundle-transfers-edit', {
 </div>
     `
 })
+
+Vue.component('privilege-domestic-transfer-view', {
+    props: ['privilege'],
+    template: `
+<div v-if="privilege">
+    <scope-usage-limit-view :scopeUsageLimit="privilege.scopeUsageLimit"></scope-usage-limit-view>
+    <recipient-pis-view :recipient="privilege.recipient" ></recipient-pis-view>
+    <sender-pis-domestic-view :sender="privilege.sender"></sender-pis-domestic-view>
+    <transfer-data-view :transferData="privilege.transferData"></transfer-data-view>
+    <delivery-mode-view :deliveryMode="privilege.deliveryMode"></delivery-mode-view>
+    <system-view :system="privilege.system"></system-view>
+    <execution-mode-view :executionMode="privilege.executionMode"></execution-mode-view>
+</div>
+    `
+})
