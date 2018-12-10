@@ -90,22 +90,30 @@ Vue.component('bundle-transfers-edit', {
     </transfers-total-amount-edit>
     <type-of-transfers-edit v-model="request.typeOfTransfers" :readonly="readonly">
     </type-of-transfers-edit>
-    <h2>Domestic Transfers</h2>
-    <transfers-edit class="mb-4" component="domestic-transfer-edit"
-        v-model="request.domesticTransfers" :readonly="readonly">
-    </transfers-edit>
-    <h2>EEA Transfers</h2>
-    <transfers-edit class="mb-4" component="foreign-transfer-eea-edit"
-        v-model="request.EEATransfers" :readonly="readonly">
-    </transfers-edit>
-    <h2>Non EEA Transfers</h2>
-    <transfers-edit class="mb-4" component="foreign-transfer-non-eea-edit"
-        v-model="request.nonEEATransfers" :readonly="readonly">
-    </transfers-edit>
-    <h2>Tax Transfers</h2>
-    <transfers-edit  class="mb-4" component="tax-transfer-edit"
-        v-model="request.taxTransfers" :readonly="readonly">
-    </transfers-edit>
+    <template v-if="request.typeOfTransfers === 'domestic'">
+        <h2>Domestic Transfers</h2>
+        <transfers-edit class="mb-4" component="domestic-transfer-edit"
+            v-model="request.domesticTransfers" :readonly="readonly">
+        </transfers-edit>
+    </template>
+    <template v-if="request.typeOfTransfers === 'EEA'">
+        <h2>EEA Transfers</h2>
+        <transfers-edit class="mb-4" component="foreign-transfer-eea-edit"
+            v-model="request.EEATransfers" :readonly="readonly">
+        </transfers-edit>
+    </template>
+    <template v-if="request.typeOfTransfers === 'nonEEA'">
+        <h2>Non EEA Transfers</h2>
+        <transfers-edit class="mb-4" component="foreign-transfer-non-eea-edit"
+            v-model="request.nonEEATransfers" :readonly="readonly">
+        </transfers-edit>
+    </template>
+    <template v-if="request.typeOfTransfers === 'tax'">
+        <h2>Tax Transfers</h2>
+        <transfers-edit  class="mb-4" component="tax-transfer-edit"
+            v-model="request.taxTransfers" :readonly="readonly">
+        </transfers-edit>
+    </template>
 </div>
     `
 })

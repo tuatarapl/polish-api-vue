@@ -118,22 +118,30 @@ Vue.component('privilege-bundle-transfers-edit', {
             <option>nonEEA</option>
             <option>tax</option>
         </select>
-        <h2>Domestic Transfers</h2>
-        <transfers-edit class="mb-4" component="domestic-transfer-edit"
-            v-model="privilege.domesticTransfers" :readonly="readonly">
-        </transfers-edit>
-        <h2>EEA Transfers</h2>
-        <transfers-edit class="mb-4" component="foreign-transfer-eea-edit"
-            v-model="privilege.EEATransfers" :readonly="readonly">
-        </transfers-edit>
-        <h2>Non EEA Transfers</h2>
-        <transfers-edit class="mb-4" component="foreign-transfer-non-eea-edit"
-            v-model="privilege.nonEEATransfers" :readonly="readonly">
-        </transfers-edit>
-        <h2>Tax Transfers</h2>
-        <transfers-edit  class="mb-4" component="tax-transfer-edit"
-            v-model="privilege.taxTransfers" :readonly="readonly">
-        </transfers-edit>
+        <template v-if="privilege.typeOfTransfers === 'domestic'">
+            <h2>Domestic Transfers</h2>
+            <transfers-edit class="mb-4" component="domestic-transfer-edit"
+                v-model="privilege.domesticTransfers" :readonly="readonly">
+            </transfers-edit>
+        </template>
+        <template v-if="privilege.typeOfTransfers === 'EEA'">
+            <h2>EEA Transfers</h2>
+            <transfers-edit class="mb-4" component="foreign-transfer-eea-edit"
+                v-model="privilege.EEATransfers" :readonly="readonly">
+            </transfers-edit>
+        </template>
+        <template v-if="privilege.typeOfTransfers === 'nonEEA'">
+            <h2>Non EEA Transfers</h2>
+            <transfers-edit class="mb-4" component="foreign-transfer-non-eea-edit"
+                v-model="privilege.nonEEATransfers" :readonly="readonly">
+            </transfers-edit>
+        </template>
+        <template v-if="privilege.typeOfTransfers === 'tax'">
+            <h2>Tax Transfers</h2>
+            <transfers-edit  class="mb-4" component="tax-transfer-edit"
+                v-model="privilege.taxTransfers" :readonly="readonly">
+            </transfers-edit>
+        </template>
     </div>
 </div>
     `
