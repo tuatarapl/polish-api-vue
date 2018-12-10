@@ -110,6 +110,37 @@ Vue.component('bundle-transfers-edit', {
     `
 })
 
+Vue.component('transfers-edit', {
+    props: ['value', 'component', 'readonly'],
+    template: `
+<ul class="list-group">
+    <li v-for="(item, index) in value" class="list-group-item">
+        <component :is="component" :request="item" :readonly="readonly"></component>
+        <button type="button" class="btn btn-primary" @click="doRemove(index)">
+            Remove
+        </button>
+    </li>
+    <li class="list-group-item">
+        <button type="button" class="btn btn-primary" @click="doAdd()">
+            Add
+        </button>
+    </li>
+</ul>
+`,
+    methods: {
+        doAdd() {
+            if (this.value) {
+                this.value.push({})
+            } else {
+                this.$emit('input',  [{}])
+            }
+        },
+        doRemove(index: number) {
+            this.value.splice(index, 1)
+        }
+    }
+})
+
 Vue.component('type-of-transfers-edit', {
     props: ['value', 'readonly'],
     template: `
