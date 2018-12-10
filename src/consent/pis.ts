@@ -109,40 +109,32 @@ Vue.component('privilege-bundle-transfers-edit', {
         <input type="text" class="form-control" id="transfersTotalAmount"
             v-model="privilege.transfersTotalAmount" :readonly="readonly"/>
     </div>
-    <div class="form-group">
-        <label for="typeOfTransfers">Type of Transfers</label>
-        <select type="text" class="form-control" id="typeOfTransfers"
-            v-model="privilege.typeOfTransfers" :disabled="readonly">
-            <option>domestic</option>
-            <option>EEA</option>
-            <option>nonEEA</option>
-            <option>tax</option>
-        </select>
-        <template v-if="privilege.typeOfTransfers === 'domestic'">
-            <h2>Domestic Transfers</h2>
-            <transfers-edit class="mb-4" component="domestic-transfer-edit"
-                v-model="privilege.domesticTransfers" :readonly="readonly">
-            </transfers-edit>
-        </template>
-        <template v-if="privilege.typeOfTransfers === 'EEA'">
-            <h2>EEA Transfers</h2>
-            <transfers-edit class="mb-4" component="foreign-transfer-eea-edit"
-                v-model="privilege.EEATransfers" :readonly="readonly">
-            </transfers-edit>
-        </template>
-        <template v-if="privilege.typeOfTransfers === 'nonEEA'">
-            <h2>Non EEA Transfers</h2>
-            <transfers-edit class="mb-4" component="foreign-transfer-non-eea-edit"
-                v-model="privilege.nonEEATransfers" :readonly="readonly">
-            </transfers-edit>
-        </template>
-        <template v-if="privilege.typeOfTransfers === 'tax'">
-            <h2>Tax Transfers</h2>
-            <transfers-edit  class="mb-4" component="tax-transfer-edit"
-                v-model="privilege.taxTransfers" :readonly="readonly">
-            </transfers-edit>
-        </template>
-    </div>
+    <type-of-transfers-edit v-model="request.typeOfTransfers" :readonly="readonly">
+    </type-of-transfers-edit>
+    <template v-if="privilege.typeOfTransfers === 'domestic'">
+        <h2>Domestic Transfers</h2>
+        <transfers-edit class="mb-4" component="domestic-transfer-edit"
+            v-model="privilege.domesticTransfers" :readonly="readonly">
+        </transfers-edit>
+    </template>
+    <template v-if="privilege.typeOfTransfers === 'EEA'">
+        <h2>EEA Transfers</h2>
+        <transfers-edit class="mb-4" component="foreign-transfer-eea-edit"
+            v-model="privilege.EEATransfers" :readonly="readonly">
+        </transfers-edit>
+    </template>
+    <template v-if="privilege.typeOfTransfers === 'nonEEA'">
+        <h2>Non EEA Transfers</h2>
+        <transfers-edit class="mb-4" component="foreign-transfer-non-eea-edit"
+            v-model="privilege.nonEEATransfers" :readonly="readonly">
+        </transfers-edit>
+    </template>
+    <template v-if="privilege.typeOfTransfers === 'tax'">
+        <h2>Tax Transfers</h2>
+        <transfers-edit  class="mb-4" component="tax-transfer-edit"
+            v-model="privilege.taxTransfers" :readonly="readonly">
+        </transfers-edit>
+    </template>
 </div>
     `
 })
