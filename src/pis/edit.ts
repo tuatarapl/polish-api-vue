@@ -217,7 +217,7 @@ Vue.component('hold-edit', {
     <input type="checkbox" class="form-control" id="hold"
         :checked="value" @input="$emit('input',$event.target.checked)" :readonly="readonly"/>
 </div>
-`
+    `
 })
 
 Vue.component('recipient-pis-edit', {
@@ -670,7 +670,10 @@ Vue.component('get-bundle-edit', {
             v-model="request.transactionsIncluded" :readonly="readonly"/>
     </div>
 </div>
-    `
+    `,
+    mounted() {
+        this.request.transactionsIncluded = this.request.transactionsIncluded || false
+    }
 })
 
 Vue.component('get-multiple-payments-edit', {
