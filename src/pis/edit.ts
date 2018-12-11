@@ -655,3 +655,20 @@ Vue.component('get-payment-edit', {
 </div>
     `
 })
+
+Vue.component('get-bundle-edit', {
+    props: ['request', 'readonly'],
+    template: `
+<div v-if="request">
+    <div class="form-group">
+        <label for="name">Bundle Id</label>
+        <input type="text" class="form-control" id="name" v-model="request.bundleId" :readonly="readonly"/>
+    </div>
+    <div class="form-group">
+        <label for="name">Transactions Included</label>
+        <input type="checkbox" class="form-control" id="name"
+            v-model="request.transactionsIncluded" :readonly="readonly"/>
+    </div>
+</div>
+    `
+})
