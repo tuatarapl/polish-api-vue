@@ -643,3 +643,15 @@ Vue.component('execution-mode-edit', {
 </div>
 `
 })
+
+Vue.component('get-payment-edit', {
+    props: ['request', 'readonly'],
+    template: `
+<div v-if="request">
+    <div class="form-group">
+        <label for="name">Payment Id</label>
+        <input type="text" class="form-control" id="name" v-model="request.paymentId" :readonly="readonly"/>
+    </div>
+</div>
+    `
+})
