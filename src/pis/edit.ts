@@ -672,3 +672,37 @@ Vue.component('get-bundle-edit', {
 </div>
     `
 })
+
+Vue.component('get-multiple-payments-edit', {
+    props: ['request', 'readonly'],
+    template: `
+<div v-if="request">
+    <li v-for="(item, index) in request.payments" class="list-group-item">
+        <div class="form-group">
+            <label for="name">Payment Id</label>
+            <input type="text" class="form-control" id="name" v-model="item.paymentId" :readonly="readonly"/>
+        </div>
+        <button type="button" class="btn btn-primary" @click="doRemove(index)">
+            Remove
+        </button>
+        </li>
+        <li class="list-group-item">
+        <button type="button" class="btn btn-primary" @click="doAdd()">
+            Add
+        </button>
+    </li>
+</div>
+    `,
+    methods: {
+        doAdd() {
+            if (this.request.payments) {
+                this.request.payments.push({})
+            } else {
+                Vue.set(this.request, 'payments', [{}])
+            }
+        },
+        doRemove(index: number) {
+            this.request.payments.splice(index, 1)
+        }
+    }
+})
