@@ -109,7 +109,7 @@ Vue.component('privilege-bundle-transfers-edit', {
         <input type="text" class="form-control" id="transfersTotalAmount"
             v-model="privilege.transfersTotalAmount" :readonly="readonly"/>
     </div>
-    <type-of-transfers-edit v-model="request.typeOfTransfers" :readonly="readonly">
+    <type-of-transfers-edit v-model="privilege.typeOfTransfers" :readonly="readonly">
     </type-of-transfers-edit>
     <template v-if="privilege.typeOfTransfers === 'domestic'">
         <h2>Domestic Transfers</h2>
